@@ -11,3 +11,22 @@ var bodyParser = require ('body-parser');
 var session = require ('express-session');
 
 var configDB = require ('./config/database.js');
+
+mongoose.connect(configDB.url)
+
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser());
+
+app.set('view engine', 'ejs'); // set up ejs for templating
+
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+// routes ======================================================================
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
+app.listen(port);
+console.log('Listening on port: ' + port);
