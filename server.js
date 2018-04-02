@@ -26,7 +26,8 @@ app.use(session({ secret: 'secretsecretsecret' })); // session secret
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-// require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+//NEED TO replace (app) with the (app, passport) but had to remove to get to work
+require('./app/routes.js')(app)// (app, passport); // load our routes and pass in our app and fully configured passport
 
 app.listen(port);
 console.log('Listening on port: ' + port);
