@@ -1,4 +1,11 @@
 // expose our config directly to our application using module.exports
+/* dotenv fetches credentials stored in .env file*/
+require('dotenv').config();
+
+var GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+var GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+var GOOGLE_CALL_BACK = process.env.GOOGLE_CALL_BACK;
+
 module.exports = {
 
     'facebookAuth': {
@@ -16,9 +23,9 @@ module.exports = {
     },
 
 'googleAuth' : {
-    'clientID'      : 'your-secret-clientID-here',
-        'clientSecret'  : 'your-client-secret-here',
-            'callbackURL'   : 'http://localhost:8080/auth/google/callback'
+    'clientID'      : GOOGLE_CLIENT_ID,
+        'clientSecret'  : GOOGLE_CLIENT_SECRET,
+            'callbackURL'   : 'http://localhost:5000/auth/google/callback'
 }
 
 }

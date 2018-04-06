@@ -5,11 +5,14 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
 
+
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+/* dotenv fetches credentials stored in .env file*/
+require('dotenv').config();
 
 var configDB = require ('./config/database.js');
 
