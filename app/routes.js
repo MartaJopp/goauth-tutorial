@@ -2,28 +2,28 @@
 
 module.exports = function (app, passport) {
 
- //Home Page
+    //Home Page
     app.get('/', function (req, res) {
         res.render('index.ejs'); // load the index.ejs file
     });
 
-//Login
+    //Login
     app.get('/login', function (req, res) {
 
-        // render the page and pass in any flash data if it exists
+        // render the page and pass in any data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') });
     });
-//process the login form
+    //process the login form
     app.post('/login', passport.authenticate('local-login', {
         successRedirect: '/profile', // redirect to the secure profile section
         failureRedirect: '/login', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 
-//Signup
+    //Signup
     app.get('/signup', function (req, res) {
 
-        // render the page and pass in any flash data if it exists
+        // render the page and pass in any data if it exists
         res.render('signup.ejs', { message: req.flash('signupMessage') });
     });
 
@@ -34,18 +34,19 @@ module.exports = function (app, passport) {
         failureFlash: true // allow flash messages
     }));
 
-//Profile
+    //Profile
     app.get('/profile', isLoggedIn, function (req, res) {
         res.render('profile.ejs', {
             user: req.user // get the user out of session and pass to template
         });
     });
 
-//Logout
+    //Logout
     app.get('/logout', function (req, res) {
         req.logout();
         res.redirect('/');
     });
+
     // =====================================
     // FACEBOOK ROUTES =====================
     // =====================================
@@ -54,7 +55,7 @@ module.exports = function (app, passport) {
         scope: ['public_profile', 'email']
     }));
 
-    // handle the callback after facebook has authenticated the user
+    //after faceook has authenticated
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
             successRedirect: '/profile',
@@ -67,20 +68,20 @@ module.exports = function (app, passport) {
         res.redirect('/');
     });
 
-// =====================================
-// GOOGLE ROUTES =======================
-// =====================================
-// send to google to do the authentication
-// profile gets us their basic information including their name
-// email gets their emails
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+    // =====================================
+    // GOOGLE ROUTES =======================
+    // =====================================
+    // send to google to do the authentication
+    // profile gets us their basic information including their name
+    // email gets their emails
+    app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-// the callback after google has authenticated the user
-app.get('/auth/google/callback',
-    passport.authenticate('google', {
-        successRedirect: '/profile',
-        failureRedirect: '/'
-    }));
+    // the callback after google has authenticated the user
+    app.get('/auth/google/callback',
+        passport.authenticate('google', {
+            successRedirect: '/profile',
+            failureRedirect: '/'
+        }));
 
 };
 
