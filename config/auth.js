@@ -20,10 +20,10 @@ module.exports = {
         'profileFields': ['id', 'email', 'name'] // For requesting permissions from Facebook API
     },
 
-'googleAuth' : {
-    'clientID'      : GOOGLE_CLIENT_ID,
-        'clientSecret'  : GOOGLE_CLIENT_SECRET,
-            'callbackURL'   : GOOGLE_CALL_BACK
-}
+    'googleAuth': {
+        'clientID': GOOGLE_CLIENT_ID,
+        'clientSecret': GOOGLE_CLIENT_SECRET,
+        'callbackURL': GOOGLE_CALL_BACK
+    }
 
 }
